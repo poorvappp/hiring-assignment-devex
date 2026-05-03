@@ -3,15 +3,14 @@ const assert = require('assert');
 const { getDeployments } = require('../src/clients/registry.client');
 
 describe('Registry API Integration', () => {
-    
+
     afterEach(() => {
         nock.cleanAll();
     });
 
     it('should fetch deployment data from the Registry API', async () => {
-        // Intercept the outgoing HTTP call to the registry
-        const scope = nock('http://deployment-registry:5176')
-            .get('/api/deployments')
+        const scope = nock('http://registry:5000')
+            .get('/deployments')
             .reply(200, [
                 { 
                     id: 'test-123', 
@@ -22,18 +21,16 @@ describe('Registry API Integration', () => {
 
         const data = await getDeployments();
 
-        // Verify the data returned matches what the API sent
         assert.ok(Array.isArray(data));
         assert.strictEqual(data[0].serviceName, 'payment-service');
         assert.strictEqual(data[0].id, 'test-123');
-        
-        // Verify that the call actually happened
+
         assert.ok(scope.isDone(), 'The Registry API was never called');
     });
 
     it('should handle API errors gracefully', async () => {
-        nock('http://deployment-registry:5176')
-            .get('/api/deployments')
+        nock('http://registry:5000')
+            .get('/deployments')
             .reply(500);
 
         try {
@@ -43,4 +40,5 @@ describe('Registry API Integration', () => {
             assert.ok(error, 'Error was successfully caught');
         }
     });
+
 });
