@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+
+  registry:
+    build: 
+      context: ./deployment-registry
+      dockerfile: Dockerfile
+    container_name: registry
+    ports: 
+      - "5176:5176"
+    environment: 
+      - MongoDb__ConnectionString=mongodb://mongodb:27017
+      - MongoDb__DatabaseName=deployment-registry
+      - MongoDb__CollectionName=deployments
+      - ASPNETCORE_URLS=http://+:5176
+    depends_on: 
+      - mongodb
+
+  insights:
+    build: 
+      context: ./deployment-insights
+      dockerfile: Dockerfile
+    container_name: insights
+    ports:
+      - "3000:3000"
+    environment:
+      # Logically use the service name 'registry' and the port 5176
+      - REGISTRY_URL=http://registry:5176/api
+    depends_on:
+      - registry

@@ -1,0 +1,18 @@
+# Ignore local dependencies
+node_modules
+**/node_modules
+**/bin
+**/obj
+
+# Ignore Git metadata
+.git
+.gitignore
+
+# Ignore Docker files themselves
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Ignore logs and temp files
+*.log
+npm-debug.log*
