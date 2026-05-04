@@ -1,0 +1,18 @@
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      glob: "deployment-insights/**/*.js"
+      run: cd deployment-insights && npm run lint
+      fail_text: "ESLint errors found. Run `make lint-fix` to auto-fix."
+
+    format-check:
+      glob: "deployment-insights/**/*.js"
+      run: cd deployment-insights && npm run format:check
+      fail_text: "Formatting issues found. Run `make format` to fix."
+
+pre-push:
+  commands:
+    test:
+      run: cd deployment-insights && npm test
+      fail_text: "Tests failed. Fix before pushing."

@@ -4,7 +4,11 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "mocha tests/**/*.test.js"
+    "test": "mocha tests/**/*.test.js",
+    "lint": "eslint src/ tests/ server.js",
+    "lint:fix": "eslint src/ tests/ server.js --fix",
+    "format": "prettier --write src/ tests/ server.js",
+    "format:check": "prettier --check src/ tests/ server.js"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +19,9 @@
     "express": "^5.2.1"
   },
   "devDependencies": {
+    "eslint": "^8.57.0",
     "mocha": "^11.7.5",
-    "nock": "^14.0.14"
+    "nock": "^14.0.14",
+    "prettier": "^3.3.0"
   }
 }

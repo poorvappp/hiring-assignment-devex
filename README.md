@@ -1,156 +1,194 @@
-# DevEx SRE Case — Deployment Insights
+# Deployment Insights — Visma DevEx SRE Assignment
 
-## The Scenario
+A microservice system for tracking and analyzing deployments across services.
 
-You've joined the Developer Experience team at a company that runs hundreds of microservice deployments per week. The team has a **Deployment Registry API** — a service that tracks every deployment (who deployed what, where, when, and whether it succeeded).
+## Services
 
-Your task: build a **Deployment Insights API** that consumes the Registry and provides useful deployment metrics and analytics.
+| Service | Language | Port | Role |
+|---------|----------|------|------|
+| `deployment-registry` | C# / .NET 10 | 5176 | Stores deployment records in MongoDB |
+| `deployment-insights` | Node.js / Express | 3000 | Stateless analytics API |
+| MongoDB | — | 27017 | Persistence layer (Registry only) |
 
-The Deployment Registry API source code is in the `deployment-registry/` directory. You'll need to get it running, then build your own service on top of it.
+---
 
-## Before You Start
+## New Developer Onboarding (10 minutes)
 
-**You are welcome and encouraged to use AI tools** during this assignment. We use AI daily in our work and consider it a valuable skill. What matters is that you **understand what you've built** and can explain your decisions during the interview. We will ask you to walk through your code, discuss trade-offs, and explain why you made certain choices.
+**Prerequisites:** Docker, Docker Compose, Node.js 20, `make`
 
-**Time expectation:** This assignment is designed to take approximately **4 hours**. There is a mandatory core path and optional extension tracks — focus on what you're strongest at. You do not need to complete everything.
+```bash
+# 1. Clone
+git clone <repo-url> && cd hiring-assignment-devex
 
-**Language:** You may implement your Insights service in **C#**, **Python**, or **TypeScript** — your choice.
+# 2. Install JS dependencies and set up pre-commit hooks
+cd deployment-insights && npm ci && npx lefthook install && cd ..
 
-## Core Tasks (~2 hours)
+# 3. Start everything
+make upd
 
-These are mandatory. They provide the baseline we use to compare candidates.
+# 4. Seed sample data
+make seed
 
-### 1. Get the Deployment Registry running
+# 5. Verify
+curl http://localhost:3000/health
+curl http://localhost:3000/insights/frequency
+```
 
-- Read the source code in `deployment-registry/` to understand the API
-- Set up MongoDB (Docker container, local install, or cloud free tier)
-- Get the service running and seed it with data (see `deployment-registry/seed-data.json`)
+That's it. See `make help` for all available commands.
 
-### 2. Build the Deployment Insights service
+> **VS Code / Cursor users:** Open in a Dev Container (`Reopen in Container`) for a fully pre-configured environment with Node 20, .NET 10, Docker, and all extensions installed automatically.
 
-Build a new microservice that calls the Deployment Registry API and exposes these endpoints:
+---
 
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/insights/frequency` | Deployment frequency per service (daily/weekly) |
-| GET | `/insights/lead-time` | Average time from deploy start to success, per service |
-| GET | `/insights/failure-rate` | Failure and rollback rate per service and environment |
-| GET | `/insights/latest` | Latest deployed version per service per environment |
-| GET | `/health` | Health check (including: can it reach the Registry API?) |
+## Quickstart
 
-Implement **at least 3 of the 5** endpoints. Your service should be stateless — all data comes from the Registry API.
+**Prerequisites:** Docker and Docker Compose installed.
 
-### 3. Containerize
+```bash
+# 1. Clone and enter the repo
+git clone <repo-url>
+cd hiring-assignment-devex
 
-- Write Dockerfiles for both services
-- Create a `docker-compose.yml` that runs everything (both services + MongoDB)
-- Running `docker-compose up` should start a fully working system
+# 2. Start all services
+docker-compose up --build
 
-### 4. CI Pipeline
+# 3. Verify everything is up
+curl http://localhost:3000/health
+```
 
-Set up a GitHub Actions workflow that:
+The full system is running when `/health` returns `"status": "UP"`.
 
-- Builds your Insights service
-- Runs tests
-- Builds a container image
-- Pushes to GitHub Container Registry (ghcr.io)
+Seeding is automated — no manual steps needed (see Kubernetes section for K8s seeding).
 
-> **Internally we use Google Artifact Registry**, but ghcr.io is free and doesn't require external accounts.
+---
 
-### 5. Tests
+## API Endpoints
 
-- Unit tests for your aggregation/calculation logic
-- At least one integration test that verifies your service can talk to the Registry API
+### Insights Service (`localhost:3000`)
 
-## Extension Tracks (~2 hours)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/health` | Health check — includes Registry connectivity status |
+| GET | `/insights/frequency` | Average deployments per week, per service |
+| GET | `/insights/lead-time` | Average time (minutes) from deploy start to success |
+| GET | `/insights/failure-rate` | Failure rate (%) across all deployments |
+| GET | `/insights/latest` | Most recently deployed version per service per environment |
 
-Pick one or more tracks based on what interests you. Going deep on one track is better than doing three tracks superficially.
+**Example responses:**
 
-### Track A: Infrastructure as Code
+```bash
+curl http://localhost:3000/insights/frequency
+# { "period": "data-range-total", "avgDeploymentsPerWeek": { "payment-service": 3.5 } }
 
-Write Terraform to provision the infrastructure needed to run the services.
+curl http://localhost:3000/insights/failure-rate
+# { "totalDeployments": 42, "failedDeployments": 3, "failureRate": "7.14%" }
 
-| Option | Description |
-|--------|-------------|
-| **GCP** (if you have an account) | GKE Autopilot or Cloud Run, Artifact Registry, MongoDB Atlas free tier |
-| **Dry-run GCP** | Write Terraform targeting GCP, validate with `terraform plan`, explain what `apply` would do |
-| **Local K8s + Terraform** | Use the Terraform Kubernetes provider against kind/minikube |
-| **Docker provider** | Use `kreuzwerker/docker` to manage containers via Terraform locally |
+curl http://localhost:3000/insights/lead-time
+# { "count": 39, "averageLeadTimeMinutes": 12.4 }
+```
 
-> **Internally we use GCP + Terraform with Atlantis** for plan/apply review workflows.
+### Registry Service (`localhost:5176`)
 
-### Track B: Kubernetes & GitOps
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/deployments` | List all deployments (filter: `?serviceName=`, `?environment=`, `?status=`) |
+| GET | `/api/deployments/{id}` | Get a single deployment |
+| POST | `/api/deployments` | Create a deployment record |
+| PUT | `/api/deployments/{id}` | Update deployment status |
+| GET | `/api/health` | Registry health check |
 
-- Write Kubernetes manifests (Deployments, Services, ConfigMaps) for both services + MongoDB
-- Run on a local cluster (kind or minikube)
-- **Bonus:** ArgoCD Application manifests for GitOps-style deployment
+---
 
-> **Internally we use GKE + ArgoCD** with an app-of-apps pattern.
+## Running Tests
 
-### Track C: Observability & Monitoring
+```bash
+cd deployment-insights
+npm ci
+npm test
+```
 
-- Structured logging (JSON, with correlation IDs)
-- Prometheus metrics: request latency histograms, error counters, dependency health gauge
-- Grafana dashboard showing service health, request rates, error rates
-- **Bonus:** alerting rules (high error rate, Registry API unreachable)
+Two test suites:
+- **Unit tests** (`aggregation.test.js`) — pure calculation functions, no network calls
+- **Integration tests** (`integration.test.js`) — Registry client with Nock HTTP mocking
 
-> **Internally we use Datadog** for metrics, logs, traces, and APM.
+---
 
-### Track D: Advanced CI/CD
+## Architecture
 
-- Multi-environment pipeline (staging → production with manual approval)
-- Container image tagging strategy (commit SHA, semver, latest)
-- Security scanning (Trivy or dependency audit)
-- **Bonus:** automated rollback on health check failure
+```
+Client
+  │
+  ▼
+Insights API (Node.js :3000)
+  │  stateless — fetches on every request
+  │  REGISTRY_URL env var
+  ▼
+Registry API (.NET :5176)
+  │
+  ▼
+MongoDB (:27017)
+```
 
-> **Internally we use GitHub Actions with reusable workflows**, Spinnaker for the monolith, and ArgoCD for microservices.
+The Insights service holds no state. Every request triggers a fresh fetch from the Registry API, which is the single source of truth.
 
-### Track E: Resilience & Testing
+---
 
-- Integration test suite using docker-compose (start deps, test, tear down)
-- Contract tests between your service and the Registry API
-- Fault injection: what happens when MongoDB dies? The Registry returns 500s? Slow responses?
-- **Bonus:** retry with exponential backoff and circuit breaker
+## Decisions & Trade-offs
 
-### Track F: Local Developer Experience
+**Stateless Insights service**
+Fetching all deployments on every request is simple and consistent with the assignment requirement, but won't scale to hundreds of thousands of records. In production, pagination or a cache layer (Redis with TTL) would be needed.
 
-Make this repo pleasant for the next developer who clones it.
+**Calculation logic separated from HTTP layer**
+Pure functions (`calculateX`) are isolated from async I/O (`getX`), making them trivially unit-testable without mocking. This is the primary reason the test suite is lightweight.
 
-- A `Makefile` (or `justfile`, `Taskfile`, etc.) that wraps common workflows in memorable commands: `make up`, `make test`, `make seed`, `make lint`, `make clean` — whatever feels right for this project
-- Quality checks that run locally and in CI: formatting, linting, static analysis for whichever language you picked
-- Pre-commit hooks (e.g. `pre-commit`, `husky`, or `lefthook`) that run the relevant subset of checks before a commit lands
-- Agent guidelines — an `AGENTS.md`, `CLAUDE.md`, or similar file that tells a coding agent how this repo is structured, how to run things, and what conventions to follow
-- A short onboarding section in the README: "here's how a new dev gets productive in 10 minutes"
-- **Bonus:** a devcontainer or Nix flake so the environment is reproducible without "works on my machine" problems
+**Frequency calculated over data range, not a rolling window**
+Rather than "deployments in the last 7 days", frequency is computed as `total_deployments / weeks_in_dataset`. This avoids returning zero for older data and gives a stable average regardless of when the query runs.
 
-> This track mirrors a lot of what our team actually spends time on. We care about the small daily frictions that compound across an engineering organisation.
+**All 5 endpoints implemented**
+The assignment required at least 3. All 5 are implemented since the stateless design keeps each one a small pure function.
 
-### Stretch Goal: Redis Caching
+---
 
-Combinable with any track:
+## What I Would Improve With More Time
 
-- Add Redis as a cache layer in front of Registry API calls
-- Cache invalidation (TTL or smarter)
-- Cache hit/miss metrics
-- Update docker-compose / IaC / K8s manifests accordingly
+- **Pagination** on Registry calls — the current implementation fetches all records in one request.
+- **Redis cache** in front of `getDeployments()` with a short TTL (e.g. 30s) to reduce Registry load under traffic.
+- **Per-service and per-environment breakdowns** on failure rate and lead time (currently global aggregates).
+- **Structured JSON logging** with request IDs for easier debugging in production.
+- **Prometheus metrics** — request latency histograms and a Registry-reachability gauge, which is what `/health` is approximating today.
+- **Resolve the merge conflict** in `aggregation.test.js` line 29 (the semicolon variant is invalid JS; the comma variant is correct).
 
-## What to Submit
+---
 
-1. **Fork** this repo to your public GitHub profile
-2. Build your solution in the fork
-3. Include a **README** in your solution explaining:
-   - How to run everything (`docker-compose up` or equivalent)
-   - Which endpoints you implemented and why
-   - What decisions you made and trade-offs you considered
-   - What you would improve given more time
+## Kubernetes
 
-## What Happens Next
+Manifests are in `k8s/`. Both services run with 2 replicas. MongoDB uses a 1Gi PersistentVolumeClaim.
 
-During the interview (~90 minutes), you'll:
+| File | Purpose |
+|------|---------|
+| `mongodb.yaml` | MongoDB + PVC |
+| `registry.yaml` | Registry API (readiness probe on `/api/health`) |
+| `insights.yaml` | Insights API (LoadBalancer service) |
+| `seed-job.yaml` | One-shot Job that seeds sample data into the Registry |
 
-- **Screen share** and walk us through your code
-- **Demo** the running system (start it up, show the endpoints working)
-- **Discuss** your decisions — we're interested in _why_, not just _what_
-- **Talk about** what you'd do differently in a production environment
+```bash
+# 1. Create image pull secret
+kubectl create secret docker-registry ghcr-login \
+  --docker-server=ghcr.io \
+  --docker-username=<github-username> \
+  --docker-password=<github-token>
 
-We're evaluating problem-solving, technical depth, communication, and how you approach unfamiliar systems — not whether you completed every task perfectly.
+# 2. Deploy everything (seed Job waits for Registry to be ready automatically)
+kubectl apply -f k8s/
+
+# 3. Access Insights locally (LoadBalancer stays <pending> on local clusters)
+kubectl port-forward svc/insights 3000:3000
+```
+
+The seed Job is idempotent — re-applying `k8s/` won't duplicate data. It auto-deletes 2 minutes after completion.
+
+## CI/CD
+
+GitHub Actions (`.github/workflows/ci.yml`) runs on every push and PR to `main`:
+1. Runs `npm test`
+2. Builds and pushes both images to `ghcr.io`

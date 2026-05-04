@@ -37,6 +37,16 @@ jobs:
           cd deployment-insights
           npm ci
 
+      - name: Lint
+        run: |
+          cd deployment-insights
+          npm run lint
+
+      - name: Format Check
+        run: |
+          cd deployment-insights
+          npm run format:check
+
       - name: Run Unit Tests
         run: |
           cd deployment-insights

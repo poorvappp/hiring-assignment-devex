@@ -27,6 +27,13 @@ spec:
               cpu: "200m"
          ports:
             - containerPort: 5176
+         readinessProbe:
+           httpGet:
+             path: /api/health
+             port: 5176
+           initialDelaySeconds: 5
+           periodSeconds: 5
+           failureThreshold: 6
          env:
          - name: MongoDb__ConnectionString
            value: "mongodb://mongodb:27017"

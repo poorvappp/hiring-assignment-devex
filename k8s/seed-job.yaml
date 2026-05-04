@@ -1,0 +1,173 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: seed-data
+data:
+  seed-data.json: |
+    [
+      {"serviceName":"user-service","version":"2.5.1","environment":"production","deploymentType":"Tag","status":"Failed","deployedBy":"bob.martinez","startedAt":"2026-03-25T07:50:19Z","finishedAt":"2026-03-25T08:14:07Z","commitSha":"79dda293ab2cbbed1be27d5c1008f51f5b83451d","pullRequestNumber":null},
+      {"serviceName":"payment-gateway","version":"4.2.1","environment":"staging","deploymentType":"PullRequest","status":"Succeeded","deployedBy":"alice.jensen","startedAt":"2026-03-25T11:04:05Z","finishedAt":"2026-03-25T11:14:20Z","commitSha":"0fe6da50a251798a1f2c1c41d0df8d59b8f5b02a","pullRequestNumber":239},
+      {"serviceName":"notification-worker","version":"1.8.1","environment":"production","deploymentType":"Tag","status":"Succeeded","deployedBy":"alice.jensen","startedAt":"2026-03-25T11:47:23Z","finishedAt":"2026-03-25T12:12:10Z","commitSha":"97e7416952933cb9756705b607de420e7ece6a3d","pullRequestNumber":null},
+      {"serviceName":"auth-proxy","version":"2.0.1","environment":"staging","deploymentType":"PullRequest","status":"Succeeded","deployedBy":"frank.andersen","startedAt":"2026-03-25T17:47:27Z","finishedAt":null,"commitSha":"9fdd68ff44d24b0583431d838fe363532823574a","pullRequestNumber":254},
+      {"serviceName":"payment-gateway","version":"4.2.2","environment":"production","deploymentType":"PullRequest","status":"Succeeded","deployedBy":"alice.jensen","startedAt":"2026-03-25T22:20:05Z","finishedAt":"2026-03-25T22:42:34Z","commitSha":"40bdcc43c5eb64ee1e68e7c8c1e492858a213dcb","pullRequestNumber":263},
+      {"serviceName":"reporting-api","version":"1.3.1","environment":"staging","deploymentType":"Branch","status":"Building","deployedBy":"david.lee","startedAt":"2026-03-26T06:35:34Z","finishedAt":null,"commitSha":"997eb2b30ffc4635035f3d737754845e6be10401","pullRequestNumber":null},
+      {"serviceName":"auth-proxy","version":"2.0.2","environment":"production","deploymentType":"PullRequest","status":"Queued","deployedBy":"bob.martinez","startedAt":"2026-03-26T07:19:23Z","finishedAt":null,"commitSha":"69e3ab8ab06b2cc7ea5b3b3b9681bd3f28205db8","pullRequestNumber":278},
+      {"serviceName":"billing-api","version":"3.10.1","environment":"production","deploymentType":"PullRequest","status":"Building","deployedBy":"frank.andersen","startedAt":"2026-03-26T17:51:51Z","finishedAt":null,"commitSha":"a3d21ef2e35ce05277018f39194370a9bc662173","pullRequestNumber":293},
+      {"serviceName":"user-service","version":"2.5.2","environment":"production","deploymentType":"Branch","status":"Failed","deployedBy":"alice.jensen","startedAt":"2026-03-26T23:57:54Z","finishedAt":"2026-03-27T00:12:48Z","commitSha":"78f3b9bf88679826b71fe4b06e92442c2799f3a3","pullRequestNumber":null},
+      {"serviceName":"notification-worker","version":"1.8.2","environment":"production","deploymentType":"PullRequest","status":"Failed","deployedBy":"emma.wilson","startedAt":"2026-03-27T11:00:18Z","finishedAt":"2026-03-27T11:15:19Z","commitSha":"ab02992b9cb45a0cf33a648d61af324b7dc1185a","pullRequestNumber":296},
+      {"serviceName":"notification-worker","version":"1.8.3","environment":"production","deploymentType":"PullRequest","status":"Succeeded","deployedBy":"frank.andersen","startedAt":"2026-03-27T12:17:58Z","finishedAt":"2026-03-27T12:28:40Z","commitSha":"d4242e5ead27e4fa37d7fa0bb2cd710d8398e926","pullRequestNumber":308},
+      {"serviceName":"user-service","version":"2.6.0","environment":"staging","deploymentType":"PullRequest","status":"Deploying","deployedBy":"alice.jensen","startedAt":"2026-03-27T16:39:31Z","finishedAt":null,"commitSha":"7cab6e246470b872ff8b31247b6ff0528130e791","pullRequestNumber":322},
+      {"serviceName":"reporting-api","version":"1.3.2","environment":"staging","deploymentType":"PullRequest","status":"Building","deployedBy":"bob.martinez","startedAt":"2026-03-28T02:14:24Z","finishedAt":null,"commitSha":"9ec0f7f336a78a1c3100d784117b124a49024556","pullRequestNumber":331},
+      {"serviceName":"user-service","version":"2.6.1","environment":"production","deploymentType":"PullRequest","status":"Succeeded","deployedBy":"david.lee","startedAt":"2026-03-28T04:23:33Z","finishedAt":null,"commitSha":"f4946226590241e5588ee7162b4173402c838cce","pullRequestNumber":336},
+      {"serviceName":"reporting-api","version":"1.3.3","environment":"staging","deploymentType":"Tag","status":"RolledBack","deployedBy":"alice.jensen","startedAt":"2026-03-28T04:29:28Z","finishedAt":"2026-03-28T04:44:01Z","commitSha":"d1fd574dd506aa60f32a06872c135be78ef14caf","pullRequestNumber":null},
+      {"serviceName":"auth-proxy","version":"2.1.0","environment":"staging","deploymentType":"Tag","status":"Succeeded","deployedBy":"emma.wilson","startedAt":"2026-03-28T15:56:59Z","finishedAt":"2026-03-28T16:20:58Z","commitSha":"984f74f773a4d8225c809394a2d18140cd0319a8","pullRequestNumber":null},
+      {"serviceName":"billing-api","version":"3.10.2","environment":"production","deploymentType":"Tag","status":"RolledBack","deployedBy":"frank.andersen","startedAt":"2026-03-28T16:11:24Z","finishedAt":"2026-03-28T16:33:49Z","commitSha":"8162214661620261940f1ff2aace9e0994ef897d","pullRequestNumber":null},
+      {"serviceName":"reporting-api","version":"1.3.4","environment":"production","deploymentType":"PullRequest","status":"RolledBack","deployedBy":"frank.andersen","startedAt":"2026-03-28T23:24:37Z","finishedAt":"2026-03-28T23:35:53Z","commitSha":"f7699668fbb5e60a0dec74ba4ae8f2807e89a70c","pullRequestNumber":347},
+      {"serviceName":"notification-worker","version":"1.8.4","environment":"production","deploymentType":"Branch","status":"Building","deployedBy":"david.lee","startedAt":"2026-03-29T02:29:06Z","finishedAt":"2026-03-29T02:41:59Z","commitSha":"fcf724e24c9a2e2205a73c3073e678c67e45cd2d","pullRequestNumber":null},
+      {"serviceName":"auth-proxy","version":"2.1.1","environment":"production","deploymentType":"Tag","status":"Succeeded","deployedBy":"david.lee","startedAt":"2026-03-29T03:51:36Z","finishedAt":"2026-03-29T04:13:06Z","commitSha":"7b817683cfdc80afe6489a0db504cd799cdf5e66","pullRequestNumber":null},
+      {"serviceName":"billing-api","version":"3.11.0","environment":"staging","deploymentType":"PullRequest","status":"Succeeded","deployedBy":"frank.andersen","startedAt":"2026-03-29T09:05:24Z","finishedAt":"2026-03-29T09:26:11Z","commitSha":"bc94f628934b9f61a9854af6994c9c58c3af3948","pullRequestNumber":358},
+      {"serviceName":"payment-gateway","version":"4.2.3","environment":"staging","deploymentType":"Tag","status":"Failed","deployedBy":"carol.smith","startedAt":"2026-03-29T09:39:17Z","finishedAt":"2026-03-29T09:48:32Z","commitSha":"52426f9cea84ca8eb28c454172b8b8661f35bc0c","pullRequestNumber":null},
+      {"serviceName":"billing-api","version":"3.11.1","environment":"production","deploymentType":"Tag","status":"RolledBack","deployedBy":"david.lee","startedAt":"2026-03-29T17:12:52Z","finishedAt":"2026-03-29T17:32:34Z","commitSha":"3b8fe871996369cefec9d35062338fb4a0c1d85e","pullRequestNumber":null},
+      {"serviceName":"payment-gateway","version":"4.2.4","environment":"production","deploymentType":"Branch","status":"Succeeded","deployedBy":"alice.jensen","startedAt":"2026-03-29T23:45:56Z","finishedAt":"2026-03-30T00:09:32Z","commitSha":"90b27ff69dbfc226e2e6a6c8306619fec256f379","pullRequestNumber":null},
+      {"serviceName":"notification-worker","version":"1.8.5","environment":"staging","deploymentType":"PullRequest","status":"RolledBack","deployedBy":"alice.jensen","startedAt":"2026-03-30T08:41:00Z","finishedAt":"2026-03-30T09:04:10Z","commitSha":"3759da4b64a968709b913f5444f9218286e0ad41","pullRequestNumber":368},
+      {"serviceName":"billing-api","version":"3.11.2","environment":"production","deploymentType":"PullRequest","status":"Deploying","deployedBy":"frank.andersen","startedAt":"2026-03-31T05:35:51Z","finishedAt":null,"commitSha":"4612018e4c023e299ac69c29d046ae9fe742e2f8","pullRequestNumber":381},
+      {"serviceName":"payment-gateway","version":"4.2.5","environment":"production","deploymentType":"Tag","status":"Deploying","deployedBy":"bob.martinez","startedAt":"2026-04-01T01:04:32Z","finishedAt":null,"commitSha":"e61f67b1546ced9175013f786e3d70da22bebbda","pullRequestNumber":null},
+      {"serviceName":"notification-worker","version":"1.8.6","environment":"staging","deploymentType":"PullRequest","status":"RolledBack","deployedBy":"bob.martinez","startedAt":"2026-04-01T11:54:38Z","finishedAt":null,"commitSha":"acb05db499caae10cf72e8dc16ba1d5f617c5574","pullRequestNumber":383},
+      {"serviceName":"billing-api","version":"3.11.3","environment":"staging","deploymentType":"Branch","status":"Succeeded","deployedBy":"david.lee","startedAt":"2026-04-01T12:41:13Z","finishedAt":"2026-04-01T12:59:09Z","commitSha":"9d87cc504024d9f9e14e064e06d188988a283cea","pullRequestNumber":null},
+      {"serviceName":"auth-proxy","version":"2.1.2","environment":"staging","deploymentType":"Tag","status":"Building","deployedBy":"frank.andersen","startedAt":"2026-04-01T22:08:37Z","finishedAt":null,"commitSha":"67cdea696d41350e5ce428dec468c92309dfd3dc","pullRequestNumber":null},
+      {"serviceName":"auth-proxy","version":"2.1.3","environment":"staging","deploymentType":"PullRequest","status":"Succeeded","deployedBy":"david.lee","startedAt":"2026-04-01T22:41:48Z","finishedAt":"2026-04-01T22:58:03Z","commitSha":"ee1a22bee372060423975fd4e726f0d7e61dd6e5","pullRequestNumber":390},
+      {"serviceName":"user-service","version":"2.6.2","environment":"production","deploymentType":"PullRequest","status":"Succeeded","deployedBy":"carol.smith","startedAt":"2026-04-01T22:58:37Z","finishedAt":"2026-04-01T23:15:42Z","commitSha":"22ee5513b9cd9a067b84af47410d149d68918a6c","pullRequestNumber":405},
+      {"serviceName":"payment-gateway","version":"4.2.6","environment":"staging","deploymentType":"Tag","status":"Succeeded","deployedBy":"david.lee","startedAt":"2026-04-02T02:38:46Z","finishedAt":"2026-04-02T02:51:11Z","commitSha":"1e9d5a56e92ef8bba7f4de3603171f35e4a4c3f8","pullRequestNumber":null},
+      {"serviceName":"payment-gateway","version":"4.2.7","environment":"staging","deploymentType":"PullRequest","status":"Succeeded","deployedBy":"carol.smith","startedAt":"2026-04-02T08:34:37Z","finishedAt":"2026-04-02T08:46:55Z","commitSha":"6f0c7db909560b35fc9635f9436fa0852685b3b7","pullRequestNumber":407},
+      {"serviceName":"reporting-api","version":"1.3.5","environment":"staging","deploymentType":"Tag","status":"Failed","deployedBy":"david.lee","startedAt":"2026-04-02T11:16:09Z","finishedAt":"2026-04-02T11:35:14Z","commitSha":"5aad281dc209169afb8a8a67abae8d8e2653d086","pullRequestNumber":null},
+      {"serviceName":"billing-api","version":"3.11.4","environment":"production","deploymentType":"Branch","status":"Succeeded","deployedBy":"alice.jensen","startedAt":"2026-04-02T14:24:32Z","finishedAt":null,"commitSha":"b7656e2fb84c6fa0b23c09c969f142f535aef924","pullRequestNumber":null},
+      {"serviceName":"auth-proxy","version":"2.1.4","environment":"staging","deploymentType":"PullRequest","status":"Succeeded","deployedBy":"bob.martinez","startedAt":"2026-04-02T20:18:32Z","finishedAt":"2026-04-02T20:39:46Z","commitSha":"c7a24ff0350876b993b5a33db76485c2e70ea0ec","pullRequestNumber":410},
+      {"serviceName":"billing-api","version":"3.12.0","environment":"staging","deploymentType":"PullRequest","status":"Succeeded","deployedBy":"carol.smith","startedAt":"2026-04-02T23:04:53Z","finishedAt":"2026-04-02T23:25:02Z","commitSha":"3b7fca5e21c2caceac2429337088d57f22edb4f2","pullRequestNumber":412},
+      {"serviceName":"payment-gateway","version":"4.2.8","environment":"production","deploymentType":"PullRequest","status":"Failed","deployedBy":"emma.wilson","startedAt":"2026-04-03T05:26:59Z","finishedAt":"2026-04-03T05:37:02Z","commitSha":"3907a9d9953171bfba2c6edf37fb92697356a619","pullRequestNumber":422},
+      {"serviceName":"notification-worker","version":"1.8.7","environment":"staging","deploymentType":"PullRequest","status":"Building","deployedBy":"alice.jensen","startedAt":"2026-04-03T13:53:58Z","finishedAt":"2026-04-03T14:15:57Z","commitSha":"971de7701c0b08c3125419b0841b35f2209dd64e","pullRequestNumber":424},
+      {"serviceName":"auth-proxy","version":"2.1.5","environment":"production","deploymentType":"Branch","status":"Succeeded","deployedBy":"david.lee","startedAt":"2026-04-04T09:13:04Z","finishedAt":"2026-04-04T09:37:29Z","commitSha":"d3d58514a3f0da63a8f4b614b4b64544d2f46ff1","pullRequestNumber":null},
+      {"serviceName":"reporting-api","version":"1.3.6","environment":"production","deploymentType":"PullRequest","status":"Failed","deployedBy":"carol.smith","startedAt":"2026-04-04T13:12:35Z","finishedAt":"2026-04-04T13:26:03Z","commitSha":"824b1008dbebea8e2a8bab270e170a46b7201705","pullRequestNumber":428},
+      {"serviceName":"auth-proxy","version":"2.1.6","environment":"staging","deploymentType":"Branch","status":"Succeeded","deployedBy":"alice.jensen","startedAt":"2026-04-04T15:52:56Z","finishedAt":"2026-04-04T16:09:20Z","commitSha":"c3413b7e626a509fd07d84e7143d9e2f63b9bc1a","pullRequestNumber":null},
+      {"serviceName":"notification-worker","version":"1.8.8","environment":"staging","deploymentType":"Branch","status":"Succeeded","deployedBy":"carol.smith","startedAt":"2026-04-04T23:22:55Z","finishedAt":"2026-04-04T23:35:37Z","commitSha":"2c0ab5b8527947ba2a7381eac7fc7a7f0dfcd0ae","pullRequestNumber":null},
+      {"serviceName":"auth-proxy","version":"2.1.7","environment":"staging","deploymentType":"Branch","status":"RolledBack","deployedBy":"alice.jensen","startedAt":"2026-04-05T03:22:39Z","finishedAt":"2026-04-05T03:38:44Z","commitSha":"a1d75ffa20ba93e669aae26f3574f48be472dcfd","pullRequestNumber":null},
+      {"serviceName":"billing-api","version":"3.12.1","environment":"staging","deploymentType":"Branch","status":"Succeeded","deployedBy":"frank.andersen","startedAt":"2026-04-05T05:49:52Z","finishedAt":"2026-04-05T06:07:45Z","commitSha":"62a9e3275bbe5725ac372d19848aba3d48a2437e","pullRequestNumber":null},
+      {"serviceName":"user-service","version":"2.6.3","environment":"staging","deploymentType":"Tag","status":"Succeeded","deployedBy":"david.lee","startedAt":"2026-04-05T11:09:44Z","finishedAt":"2026-04-05T11:22:56Z","commitSha":"054321b96c0b4ce52c637a25674f1b5872cf4e95","pullRequestNumber":null},
+      {"serviceName":"payment-gateway","version":"4.2.9","environment":"staging","deploymentType":"Tag","status":"Deploying","deployedBy":"bob.martinez","startedAt":"2026-04-06T23:28:05Z","finishedAt":null,"commitSha":"d4715386da8041394e1699870e9c89b4a2065ff7","pullRequestNumber":null},
+      {"serviceName":"payment-gateway","version":"4.2.10","environment":"staging","deploymentType":"Tag","status":"Succeeded","deployedBy":"david.lee","startedAt":"2026-04-07T01:37:19Z","finishedAt":"2026-04-07T01:50:21Z","commitSha":"6df414ebaf18b7ff975154c4da9e899209c87f6b","pullRequestNumber":null},
+      {"serviceName":"payment-gateway","version":"4.3.0","environment":"staging","deploymentType":"PullRequest","status":"Deploying","deployedBy":"carol.smith","startedAt":"2026-04-07T02:31:45Z","finishedAt":null,"commitSha":"fe957ec0b8d28caee83633a5eca32530fcd79d6e","pullRequestNumber":431},
+      {"serviceName":"notification-worker","version":"1.8.9","environment":"production","deploymentType":"PullRequest","status":"Building","deployedBy":"frank.andersen","startedAt":"2026-04-07T23:44:18Z","finishedAt":null,"commitSha":"50ee892481d51719a01a86f2a0ef22ded46ff939","pullRequestNumber":432},
+      {"serviceName":"user-service","version":"2.6.4","environment":"production","deploymentType":"PullRequest","status":"Succeeded","deployedBy":"carol.smith","startedAt":"2026-04-08T04:58:34Z","finishedAt":"2026-04-08T05:07:29Z","commitSha":"d8c13fc456106625acb0bc1cc3a16d14afdca941","pullRequestNumber":435},
+      {"serviceName":"user-service","version":"2.7.0","environment":"production","deploymentType":"PullRequest","status":"Succeeded","deployedBy":"emma.wilson","startedAt":"2026-04-08T14:15:21Z","finishedAt":"2026-04-08T14:33:52Z","commitSha":"ec32df7871a765eaed6fb3ee500de8ecc717c23d","pullRequestNumber":448},
+      {"serviceName":"user-service","version":"2.7.1","environment":"staging","deploymentType":"PullRequest","status":"Failed","deployedBy":"emma.wilson","startedAt":"2026-04-09T07:58:43Z","finishedAt":"2026-04-09T08:07:44Z","commitSha":"318e05eaec3644170be1512ea5bc1ceae928d356","pullRequestNumber":460},
+      {"serviceName":"notification-worker","version":"1.8.10","environment":"production","deploymentType":"Branch","status":"Failed","deployedBy":"alice.jensen","startedAt":"2026-04-09T08:14:53Z","finishedAt":"2026-04-09T08:24:09Z","commitSha":"f248f50b642d1703929fcd00465f27ba79d561a5","pullRequestNumber":null},
+      {"serviceName":"billing-api","version":"3.12.2","environment":"staging","deploymentType":"Tag","status":"Failed","deployedBy":"alice.jensen","startedAt":"2026-04-09T19:28:51Z","finishedAt":"2026-04-09T19:51:28Z","commitSha":"310da34b8224298ccdeff28dbff70d64cac97fee","pullRequestNumber":null},
+      {"serviceName":"billing-api","version":"3.12.3","environment":"production","deploymentType":"PullRequest","status":"Succeeded","deployedBy":"alice.jensen","startedAt":"2026-04-10T09:29:22Z","finishedAt":"2026-04-10T09:44:36Z","commitSha":"53107939e94c46881312aa52e70fae60d71ef021","pullRequestNumber":469},
+      {"serviceName":"auth-proxy","version":"2.1.8","environment":"production","deploymentType":"Tag","status":"Queued","deployedBy":"bob.martinez","startedAt":"2026-04-10T15:42:34Z","finishedAt":null,"commitSha":"f104ec8efb16aa97ca7bdd94c4876cffe48041c8","pullRequestNumber":null},
+      {"serviceName":"user-service","version":"2.7.2","environment":"production","deploymentType":"PullRequest","status":"Succeeded","deployedBy":"emma.wilson","startedAt":"2026-04-10T17:41:07Z","finishedAt":"2026-04-10T17:58:18Z","commitSha":"b413883945583f52f832477c27be8987f435380e","pullRequestNumber":477},
+      {"serviceName":"reporting-api","version":"1.3.7","environment":"staging","deploymentType":"PullRequest","status":"Failed","deployedBy":"alice.jensen","startedAt":"2026-04-10T21:04:51Z","finishedAt":"2026-04-10T21:24:19Z","commitSha":"09b60b454b1b274be3e37b158d746b08ad1a0575","pullRequestNumber":491},
+      {"serviceName":"reporting-api","version":"1.4.0","environment":"staging","deploymentType":"Branch","status":"Succeeded","deployedBy":"emma.wilson","startedAt":"2026-04-10T21:55:20Z","finishedAt":"2026-04-10T22:06:19Z","commitSha":"cc03b09ee89a0af7698e386464701abfe00bc949","pullRequestNumber":null},
+      {"serviceName":"billing-api","version":"3.12.4","environment":"production","deploymentType":"Tag","status":"Queued","deployedBy":"emma.wilson","startedAt":"2026-04-10T22:04:52Z","finishedAt":null,"commitSha":"69203cd247a397d379df93e36512fc2943c380e4","pullRequestNumber":null},
+      {"serviceName":"auth-proxy","version":"2.1.9","environment":"staging","deploymentType":"Tag","status":"Deploying","deployedBy":"carol.smith","startedAt":"2026-04-11T12:07:51Z","finishedAt":null,"commitSha":"28494545db0eb13687be5ac4f467d415c77ecc98","pullRequestNumber":null},
+      {"serviceName":"user-service","version":"2.7.3","environment":"production","deploymentType":"Tag","status":"Deploying","deployedBy":"david.lee","startedAt":"2026-04-11T19:33:40Z","finishedAt":null,"commitSha":"318bc94b4a7ccd4cd2d7c58cea1b4712492819c4","pullRequestNumber":null},
+      {"serviceName":"user-service","version":"2.8.0","environment":"production","deploymentType":"PullRequest","status":"Queued","deployedBy":"emma.wilson","startedAt":"2026-04-12T04:19:24Z","finishedAt":null,"commitSha":"6be92592e0cc2d3446cfa6178e56084d63d4312a","pullRequestNumber":499},
+      {"serviceName":"notification-worker","version":"1.9.0","environment":"staging","deploymentType":"Branch","status":"Succeeded","deployedBy":"frank.andersen","startedAt":"2026-04-12T05:50:46Z","finishedAt":"2026-04-12T06:07:00Z","commitSha":"607f49cdb88df72d4aa5947362b2fa1fabc7d2c7","pullRequestNumber":null},
+      {"serviceName":"notification-worker","version":"1.9.1","environment":"production","deploymentType":"Tag","status":"RolledBack","deployedBy":"alice.jensen","startedAt":"2026-04-12T10:20:14Z","finishedAt":"2026-04-12T10:29:50Z","commitSha":"17e761a26e264482bc204ef9ee30158b9e50a952","pullRequestNumber":null},
+      {"serviceName":"user-service","version":"2.8.1","environment":"staging","deploymentType":"Tag","status":"Succeeded","deployedBy":"alice.jensen","startedAt":"2026-04-12T21:02:34Z","finishedAt":"2026-04-12T21:15:13Z","commitSha":"26a1b423a500c3a55cbf4fc344816bc4f4c6ab75","pullRequestNumber":null},
+      {"serviceName":"reporting-api","version":"1.4.1","environment":"production","deploymentType":"PullRequest","status":"Succeeded","deployedBy":"david.lee","startedAt":"2026-04-12T22:44:32Z","finishedAt":"2026-04-12T23:07:29Z","commitSha":"550deb0a23b4fb458ee2cec07783d5e1afbb49de","pullRequestNumber":513},
+      {"serviceName":"reporting-api","version":"1.4.2","environment":"staging","deploymentType":"PullRequest","status":"Succeeded","deployedBy":"alice.jensen","startedAt":"2026-04-13T02:38:10Z","finishedAt":"2026-04-13T02:50:59Z","commitSha":"c6dc7f02b4a9902abccec43d90ec554707cba21a","pullRequestNumber":518},
+      {"serviceName":"reporting-api","version":"1.4.3","environment":"staging","deploymentType":"Branch","status":"Succeeded","deployedBy":"emma.wilson","startedAt":"2026-04-13T02:46:37Z","finishedAt":"2026-04-13T03:07:35Z","commitSha":"c889016b67166ac9b3896b5455fb325ba499e2fa","pullRequestNumber":null},
+      {"serviceName":"payment-gateway","version":"4.3.1","environment":"staging","deploymentType":"PullRequest","status":"Succeeded","deployedBy":"david.lee","startedAt":"2026-04-13T10:13:30Z","finishedAt":"2026-04-13T10:34:41Z","commitSha":"123ee7c938a49c635681366312e1c365aa6a3f97","pullRequestNumber":519},
+      {"serviceName":"billing-api","version":"3.12.5","environment":"production","deploymentType":"PullRequest","status":"Succeeded","deployedBy":"carol.smith","startedAt":"2026-04-13T10:47:11Z","finishedAt":"2026-04-13T11:11:52Z","commitSha":"760c831d44570b3405274122c8c6a73f54b7125d","pullRequestNumber":527},
+      {"serviceName":"reporting-api","version":"1.4.4","environment":"staging","deploymentType":"PullRequest","status":"Succeeded","deployedBy":"alice.jensen","startedAt":"2026-04-13T15:45:09Z","finishedAt":"2026-04-13T16:08:37Z","commitSha":"ee88311cfb9ec5f807dc660411d5de6e75f94ba8","pullRequestNumber":528},
+      {"serviceName":"notification-worker","version":"1.9.2","environment":"staging","deploymentType":"PullRequest","status":"Succeeded","deployedBy":"frank.andersen","startedAt":"2026-04-13T17:38:51Z","finishedAt":null,"commitSha":"bd1fc15ddff3d725274c3b820e53b41728b23393","pullRequestNumber":535}
+    ]
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: registry-seeder
+spec:
+  ttlSecondsAfterFinished: 120
+  template:
+    spec:
+      restartPolicy: OnFailure
+      initContainers:
+        - name: wait-for-registry
+          image: busybox:1.36
+          command:
+            - sh
+            - -c
+            - |
+              echo "Waiting for Registry to be ready..."
+              until wget -qO- http://registry:5176/api/health > /dev/null 2>&1; do
+                echo "  Registry not ready, retrying in 3s..."
+                sleep 3
+              done
+              echo "Registry is up."
+      containers:
+        - name: seeder
+          image: node:20-alpine
+          command:
+            - node
+            - -e
+            - |
+              const http = require('http');
+              const fs = require('fs');
+
+              const REGISTRY = 'http://registry:5176';
+              const records = JSON.parse(fs.readFileSync('/data/seed-data.json', 'utf8'));
+
+              function get(url) {
+                return new Promise((resolve, reject) => {
+                  http.get(url, res => {
+                    let body = '';
+                    res.on('data', c => body += c);
+                    res.on('end', () => resolve({ status: res.statusCode, body }));
+                  }).on('error', reject);
+                });
+              }
+
+              function post(path, data) {
+                return new Promise((resolve, reject) => {
+                  const payload = JSON.stringify(data);
+                  const req = http.request(
+                    { hostname: 'registry', port: 5176, path, method: 'POST',
+                      headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payload) } },
+                    res => {
+                      let body = '';
+                      res.on('data', c => body += c);
+                      res.on('end', () => resolve(res.statusCode));
+                    }
+                  );
+                  req.on('error', reject);
+                  req.write(payload);
+                  req.end();
+                });
+              }
+
+              async function run() {
+                const check = await get(`${REGISTRY}/api/deployments`);
+                const existing = JSON.parse(check.body);
+                if (existing.length > 0) {
+                  console.log(`Already seeded (${existing.length} records). Skipping.`);
+                  return;
+                }
+                console.log(`Seeding ${records.length} records...`);
+                let ok = 0, fail = 0;
+                for (const r of records) {
+                  const status = await post('/api/deployments', r);
+                  if (status >= 200 && status < 300) { ok++; }
+                  else { console.error(`WARN: ${r.serviceName} v${r.version} -> HTTP ${status}`); fail++; }
+                }
+                console.log(`Done. ${ok} inserted, ${fail} failed.`);
+                if (fail > 0) process.exit(1);
+              }
+
+              run().catch(e => { console.error(e.message); process.exit(1); });
+          volumeMounts:
+            - name: seed-data
+              mountPath: /data
+      volumes:
+        - name: seed-data
+          configMap:
+            name: seed-data
