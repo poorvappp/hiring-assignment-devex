@@ -24,12 +24,14 @@ describe('Insights Aggregation Logic (Unit Tests)', () => {
     it('should correctly calculate average lead time in minutes', () => {
         const mockData = [
             {
-                createdAt: '2023-01-01T10:00:00Z',
-                finishedAt: '2023-01-01T10:10:00Z' // 10 mins
+                startedAt: '2023-01-01T10:00:00Z',
+                finishedAt: '2023-01-01T10:10:00Z'; // 10 mins
+                status: 'Succeeded'
             },
             {
-                createdAt: '2023-01-01T10:00:00Z',
-                finishedAt: '2023-01-01T10:20:00Z' // 20 mins
+                startedAt: '2023-01-01T10:00:00Z',
+                finishedAt: '2023-01-01T10:20:00Z', // 20 mins
+                status: 'Succeeded'
             }
         ];
 

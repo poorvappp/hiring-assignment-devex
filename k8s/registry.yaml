@@ -17,6 +17,7 @@ spec:
       containers:
        - name: registry
          image: ghcr.io/poorvappp/hiring-assignment-devex/registry:latest
+         imagePullPolicy: Always
          resources:
             requests:
               memory: "64Mi"

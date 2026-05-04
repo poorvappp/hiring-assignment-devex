@@ -17,6 +17,7 @@ spec:
       containers:
         - name: insights
           image: ghcr.io/poorvappp/hiring-assignment-devex/insights:latest
+          imagePullPolicy: Always
           resources:
             requests:
               memory: "64Mi"
