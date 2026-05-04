@@ -1,4 +1,4 @@
-# Deployment Insights — Visma DevEx SRE Assignment
+# Deployment Insights — Visma DevEx Technical Case
 
 A microservice system for tracking and analyzing deployments across services.
 
