@@ -1,4 +1,4 @@
-# CLAUDE.md — Deployment Insights (Visma DevEx SRE Hiring Assignment)
+# CLAUDE.md - Deployment Insights 
 
 ## Project Overview
 
