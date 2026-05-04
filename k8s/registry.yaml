@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: registry
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: registry
+  template:
+    metadata:
+      labels:
+        app: registry
+    spec:
+      imagePullSecrets:
+        - name: ghcr-login
+      containers:
+       - name: registry
+         image: ghcr.io/poorvappp/hiring-assignment-devex/registry:latest
+         resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+         ports:
+            - containerPort: 5176
+         env:
+         - name: MongoDb__ConnectionString
+           value: "mongodb://mongodb:27017"
+
+         - name: MongoDb__DatabaseName
+           value: "deployment-registry"
+
+         - name: MongoDb__CollectionName
+           value: "deployments"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: registry
+spec:
+  selector:
+    app: registry
+  ports:
+    - protocol: TCP
+      port: 5176
+      targetPort: 5176

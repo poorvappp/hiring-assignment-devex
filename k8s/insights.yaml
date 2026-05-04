@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insights
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: insights
+  template:
+    metadata:
+      labels:
+        app: insights
+    spec:
+      imagePullSecrets:
+        - name: ghcr-login
+      containers:
+        - name: insights
+          image: ghcr.io/poorvappp/hiring-assignment-devex/insights:latest
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          ports:
+            - containerPort: 3000
+          env:
+            - name: MONGO_URI
+              value: "mongodb://mongodb:27017/deployments"
+            - name: REGISTRY_URL
+              value: "http://registry:5176/api"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: insights
+spec:
+  type: LoadBalancer
+  selector:
+    app: insights
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
