@@ -12,7 +12,7 @@ A microservice system for tracking and analyzing deployments across services.
 
 ---
 
-## New Developer Onboarding (10 minutes)
+## Before you dive in:
 
 **Prerequisites:** Docker, Docker Compose, Node.js 20, `make`
 
