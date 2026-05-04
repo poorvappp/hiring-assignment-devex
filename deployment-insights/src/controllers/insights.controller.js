@@ -52,5 +52,5 @@ module.exports = {
     getLatest,
     getFrequency,
     getFailureRate,
-    getLeadTime
+    getLeadTime,
 };

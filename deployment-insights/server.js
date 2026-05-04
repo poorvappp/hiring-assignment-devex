@@ -12,16 +12,16 @@ const PORT = 3000;
 app.get('/health', async (req, res) => {
     try {
         await checkRegistryHealth();
-        res.json({ 
-            status: "UP", 
-            registryConnection: "OK",
-            timestamp: new Date().toISOString()
+        res.json({
+            status: 'UP',
+            registryConnection: 'OK',
+            timestamp: new Date().toISOString(),
         });
     } catch (error) {
-        res.status(503).json({ 
-            status: "DEGRADED", 
-            error: "Registry unreachable",
-            details: error.message 
+        res.status(503).json({
+            status: 'DEGRADED',
+            error: 'Registry unreachable',
+            details: error.message,
         });
     }
 });

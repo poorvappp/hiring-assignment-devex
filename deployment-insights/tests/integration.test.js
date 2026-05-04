@@ -3,7 +3,6 @@ const assert = require('assert');
 const { getDeployments } = require('../src/clients/registry.client');
 
 describe('Registry API Integration', () => {
-
     before(() => {
         // Match EXACTLY what your client uses
         process.env.REGISTRY_URL = 'http://registry:5176/api';
@@ -18,13 +17,13 @@ describe('Registry API Integration', () => {
 
     it('should fetch deployment data from the Registry API', async () => {
         const scope = nock('http://registry:5176')
-            .get('/api/deployments')  // ✅ EXACT MATCH
+            .get('/api/deployments') // ✅ EXACT MATCH
             .reply(200, [
-                { 
-                    id: 'test-123', 
-                    serviceName: 'payment-service', 
-                    status: 'Success' 
-                }
+                {
+                    id: 'test-123',
+                    serviceName: 'payment-service',
+                    status: 'Success',
+                },
             ]);
 
         const data = await getDeployments();

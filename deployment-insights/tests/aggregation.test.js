@@ -1,17 +1,13 @@
 const assert = require('assert');
-const {
-    calculateFailureRate,
-    calculateLeadTime
-} = require('../src/services/insights.service');
+const { calculateFailureRate, calculateLeadTime } = require('../src/services/insights.service');
 
 describe('Insights Aggregation Logic (Unit Tests)', () => {
-
     it('should correctly calculate failure rate percentage', () => {
         const mockData = [
             { status: 'Failed' },
             { status: 'Success' },
             { status: 'Success' },
-            { status: 'Success' }
+            { status: 'Success' },
         ];
 
         const result = calculateFailureRate(mockData);
@@ -25,14 +21,14 @@ describe('Insights Aggregation Logic (Unit Tests)', () => {
         const mockData = [
             {
                 startedAt: '2023-01-01T10:00:00Z',
-                finishedAt: '2023-01-01T10:10:00Z',// 10 mins
-                status: 'Succeeded'
+                finishedAt: '2023-01-01T10:10:00Z', // 10 mins
+                status: 'Succeeded',
             },
             {
                 startedAt: '2023-01-01T10:00:00Z',
                 finishedAt: '2023-01-01T10:20:00Z', // 20 mins
-                status: 'Succeeded'
-            }
+                status: 'Succeeded',
+            },
         ];
 
         const result = calculateLeadTime(mockData);
@@ -40,5 +36,4 @@ describe('Insights Aggregation Logic (Unit Tests)', () => {
         assert.strictEqual(result.averageLeadTimeMinutes, 15);
         assert.strictEqual(result.count, 2);
     });
-
 });
