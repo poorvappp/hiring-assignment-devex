@@ -25,7 +25,11 @@ describe('Insights Aggregation Logic (Unit Tests)', () => {
         const mockData = [
             {
                 startedAt: '2023-01-01T10:00:00Z',
+<<<<<<< HEAD
                 finishedAt: '2023-01-01T10:10:00Z'; // 10 mins
+=======
+                finishedAt: '2023-01-01T10:10:00Z', // 10 mins
+>>>>>>> 08048dad664011c450ed6faf1ad32d9c31c6492d
                 status: 'Succeeded'
             },
             {
