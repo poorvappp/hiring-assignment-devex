@@ -12,7 +12,7 @@ A microservice system for tracking and analyzing deployments across services.
 
 ---
 
-## Before you dive in:
+## Prerequisites
 
 **Prerequisites:** Docker, Docker Compose, Node.js 20, `make`
 
