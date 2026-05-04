@@ -144,20 +144,6 @@ Pure functions (`calculateX`) are isolated from async I/O (`getX`), making them 
 **Frequency calculated over data range, not a rolling window**
 Rather than "deployments in the last 7 days", frequency is computed as `total_deployments / weeks_in_dataset`. This avoids returning zero for older data and gives a stable average regardless of when the query runs.
 
-**All 5 endpoints implemented**
-The assignment required at least 3. All 5 are implemented since the stateless design keeps each one a small pure function.
-
----
-
-## What I Would Improve With More Time
-
-- **Pagination** on Registry calls — the current implementation fetches all records in one request.
-- **Redis cache** in front of `getDeployments()` with a short TTL (e.g. 30s) to reduce Registry load under traffic.
-- **Per-service and per-environment breakdowns** on failure rate and lead time (currently global aggregates).
-- **Structured JSON logging** with request IDs for easier debugging in production.
-- **Prometheus metrics** — request latency histograms and a Registry-reachability gauge, which is what `/health` is approximating today.
-- **Resolve the merge conflict** in `aggregation.test.js` line 29 (the semicolon variant is invalid JS; the comma variant is correct).
-
 ---
 
 ## Kubernetes
